@@ -1,0 +1,130 @@
+<div class="my-background bg-cover bg-center flex flex-col justify-center   bg-gray-100 p-4">
+    <!-- Main Container -->
+    <div class="w-full max-w-screen-2xl mx-auto bg-gray-100">
+      <!-- Top Cards Section -->
+      <div *ngIf="showDashboard" class="grid grid-cols-12 gap-4 p-2">
+        <!-- Welcome Card -->
+        <div class="col-span-12 lg:col-span-3 bg-cover bg-center p-4 rounded shadow relative h-auto"
+             style="background-image: url('../../assets/images/biologist-bg.jpg');">
+          <div class="absolute inset-0 bg-cover bg-center filter bg-opacity-50"></div>
+          <div class="py-10 bg-gray-100 text-gray-800 bg-opacity-60 font-bold text-center">
+            <h3 class="text-3xl">Hello Biologist!</h3>
+            <h3 class="font-semibold text-xl">Welcome to Wildlife Management</h3>
+          </div>
+        </div>
+  
+        <!-- Total Observations Card -->
+        <div class="col-span-12 lg:col-span-3 bg-white p-6 rounded-lg shadow-lg border flex items-center">
+          <div class="bg-blue-100 p-3 rounded-full text-blue-600 mr-4">
+            <i class="fas fa-book-open text-4xl"></i>
+          </div>
+          <div>
+            <h3 class="text-lg font-semibold text-gray-700">Total Observations</h3>
+            <p class="text-3xl font-bold text-gray-800">5</p>
+          </div>
+        </div>
+  
+        <!-- Add Observation Card -->
+        <div class="col-span-12 lg:col-span-3 bg-white p-6 rounded-lg shadow-lg border flex items-center">
+          <div>
+            <button 
+            (click)="addObservation()"
+                    class="bg-green-500 text-white py-2 px-4 rounded-full hover:bg-green-600 transition-all">
+              <i class="fas fa-plus-circle mr-2"></i>
+              Add Observation
+            </button>
+          </div>
+          <div class="ml-4 text-gray-500 text-sm">
+            Quickly record new observations.
+          </div>
+        </div>
+  
+        <!-- Alerts Card -->
+        <div class="col-span-12 lg:col-span-3 bg-white p-6 rounded-lg shadow-lg border flex flex-col">
+          <h3 class="text-2xl font-semibold text-gray-800 mb-4 flex items-center">
+            <span class="text-yellow-600 mr-2">
+              <i class="fas fa-exclamation-circle text-red-500 text-2xl"></i>
+            </span>
+            Alerts
+          </h3>
+          <div *ngIf="!alerts.length" class="text-lg text-gray-500 text-center">No Alerts</div>
+          <ul class="list-disc ml-6 text-gray-600 text-lg" *ngIf="!criticalAlerts.length">
+            <li *ngFor="let alert of alerts">
+              <strong>{{ alert.species }} -  {{alert.status}} </strong>
+            </li>
+          </ul>
+          <ul class="list-disc ml-6 text-gray-600 text-xl">
+            <li *ngFor="let animal of criticalAlerts">
+                <strong>{{ animal}} - Critical</strong>
+              </li>
+              
+        </ul>
+        </div>
+      </div>
+  
+      <!-- Charts and Recent Records Section -->
+      <div class="flex flex-col lg:flex-row gap-4 mt-4">
+        <!-- Charts Section -->
+        <div *ngIf="showDashboard" class="lg:w-1/4 flex flex-col space-y-4">
+          <div class="bg-white p-4 rounded-lg shadow">
+            <h3 class="text-lg font-bold text-gray-800 mb-2">Population Trends</h3>
+            <div>
+            <canvas id="populationChart"></canvas>
+          </div>
+          </div>
+          <div class="bg-white p-4 rounded-lg shadow">
+            <h3 class="text-lg font-bold text-gray-800 mb-2">Behavioral Reports</h3>
+            <div>
+              <div *ngIf="!recentObservations.length" class="m-6 text-xl text-gray-500">No recent Observations</div>
+              <ul class="list-disc ml-6 text-gray-600 text-xl">
+                <li *ngFor="let recent of recentObservations">
+                    <strong>{{ recent.species}} - {{recent.observationDate | date:'yyyy-MM-dd'}}</strong>
+                  </li>   
+            </ul>
+            </div>
+          </div>
+        </div>
+  
+        <!-- Recent Observations Section -->
+        <div class="lg:w-full bg-white p-4 rounded-lg shadow-lg overflow-auto">
+          <h3 class="text-lg font-bold text-gray-800 mb-4">Recent Observations</h3>
+          <div *ngIf="!recentRecords.length" class=" text-center p-32 mx-10 text-2xl font-semibold text-gray-600">No Records Found</div>
+              
+          <table *ngIf="recentRecords.length"  class="min-w-full table-auto">
+            <thead class="bg-gray-200 text-gray-700">
+              <tr>
+                <th class="px-4 py-2 text-left">Species</th>
+                <th class="px-4 py-2 text-left">Date</th>
+                <th class="px-4 py-2 text-left">Behavioral Report</th>
+                <th class="px-4 py-2 text-left">Population</th>
+                <th class="px-4 py-2 text-left">Actions</th>
+              </tr>
+            </thead>
+           
+            <tbody>
+              <tr *ngFor="let record of recentRecords" class="border-b">
+               
+                <td class="px-4 py-2"> {{record.species }}</td>
+                <td class="px-4 py-2">{{ record.observationDate | date}} </td>
+                <td class="px-4 py-2">{{record.behavioralReport }}</td>
+                <td class="px-4 py-2">{{record.populationEstimate}}</td>
+                <td class="border px-4 py-2">
+                  <button 
+                    (click)="editObservation(record.dataId ?? 0)" 
+                    class="text-blue-500 hover:text-blue-700">
+                    <i class="fa fa-edit"></i> 
+                  </button>
+                  <button 
+                    class="text-red-500 hover:text-red-700 ml-4"
+                    (click)=" deleteObservation(record.dataId ?? 0)">
+                    <i class="fa fa-trash"></i> 
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+  

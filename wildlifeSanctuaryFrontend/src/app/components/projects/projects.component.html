@@ -1,0 +1,38 @@
+<div class="space-y-4 w-full md:w-2/3 mx-auto">
+    <!-- Heading and Create New Project Button -->
+    <div class="flex justify-between items-center mb-4">
+        <h2 class="text-3xl font-bold">Project Management</h2>
+        <button (click)="addProject()" class="bg-green-500 text-white px-4 py-2 rounded-lg text-sm">
+            Create New Project
+        </button>
+    </div>
+
+    <!-- Looping through the projects -->
+    <div *ngFor="let project of projects" class="bg-white p-4 rounded-lg shadow-md">
+        <div class="flex justify-between items-center">
+            <div class="flex flex-col lg:flex-row">
+                <h3 class="text-xl font-semibold px-3">Project ID: {{ project.projectId }}</h3>
+                <span class=" px-4 py-1 rounded-lg text-white " [ngClass]="{
+                  'bg-green-500': project.status === 'Active',
+                  'bg-yellow-500': project.status === 'Pending',
+                  'bg-red-500': project.status === 'Cancelled',
+                  'bg-blue-500':project.status==='Completed'
+                  
+                }">
+                    {{ project.status }}
+                </span>
+            </div>
+            <div class="flex flex-col md:flex-row gap-2 lg:gap-4">
+
+                <button (click)="editProject(project.projectId)"
+                    class="bg-blue-500 px-3 py-2 text-white rounded-md text-sm">Change Status</button>
+                <button (click)="deleteProject(project.projectId)"
+                    class="bg-red-500 px-3 py-2 text-white rounded-md text-sm">Delete</button>
+            </div>
+        </div>
+        <p class="text-gray-700"><strong>Activity Type:</strong> {{ project.activityType }}</p>
+        <p class="text-gray-700"><strong>Start Date:</strong> {{ project.startDate }}</p>
+        <p class="text-gray-700"><strong>End Date:</strong> {{ project.endDate }}</p>
+        <p class="text-gray-700"><strong>Assigned RangerId:</strong> {{ project.rangerId }}</p>
+    </div>
+</div>

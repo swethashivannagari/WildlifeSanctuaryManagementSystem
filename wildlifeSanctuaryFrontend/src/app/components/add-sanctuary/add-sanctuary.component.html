@@ -1,0 +1,123 @@
+<div class="flex justify-center items-center p-5 bg-cover bg-center bg-no-repeat" style="background-image: url('../../../assets/images/sanctuary.jpg');">
+    <div class="bg-white p-8 rounded-lg shadow-lg w-full max-w-md">
+      <h2 class="text-2xl font-semibold text-center text-green-700 mb-6">{{isEditMode?'Edit Sanctuary Details':'Add Sanctuary'}} </h2>
+  
+     <form (ngSubmit)="addSanctuary()" [formGroup]="sanctuaryForm">
+         <!-- Sanctuary Name -->
+      <div class="mb-4">
+        <label for="name" class="block text-sm font-medium text-gray-600">Sanctuary Name</label>
+        <input
+          id="name"
+          formControlName="sanctuaryName"
+          type="text"
+          class="mt-1 block w-full px-3 py-2 border rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+          placeholder="Enter sanctuary name"
+        />  
+        <div *ngIf="sanctuaryForm.get('sanctuaryName')?.invalid && sanctuaryForm.get('sanctuaryName')?.touched">
+            <small class="text-red-600 text-sm font-bold" *ngIf="sanctuaryForm.get('sanctuaryName')?.hasError('required')">
+              **Sanctuary name is required
+            </small>
+            <small class="text-red-600 text-sm font-bold" *ngIf="sanctuaryForm.get('sanctuaryName')?.hasError('minlength')">
+              **Sanctuary name cannot exceed 100 characters.
+            </small>
+          </div>   
+      </div>
+
+      <!--Location-->
+      <div class="mb-4">
+        <label for="location" class="block text-sm font-medium text-gray-600">Location</label>
+        <input
+          id="location"
+          formControlName="location"
+          type="text"
+          class="mt-1 block w-full px-3 py-2 border rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+          placeholder="Enter location"
+        /> 
+        <div *ngIf="sanctuaryForm.get('location')?.invalid && sanctuaryForm.get('location')?.touched">
+            <small class="text-red-600 text-sm font-bold" *ngIf="sanctuaryForm.get('location')?.hasError('required')">
+              **location is required
+            </small>
+          </div>      
+      </div>
+
+      <!--Total Area-->
+      <div class="mb-4">
+        <label for="totalArea" class="block text-sm font-medium text-gray-600">Total Area(in Sq.ft)</label>
+        <input
+          id="totalArea"
+          formControlName="totalArea"
+          type="number"
+          class="mt-1 block w-full px-3 py-2 border rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+          placeholder="Enter total area"
+        />  
+           <div *ngIf="sanctuaryForm.get('totalArea')?.invalid && sanctuaryForm.get('totalArea')?.touched">
+            <small class="text-red-600 text-sm font-bold" *ngIf="sanctuaryForm.get('totalArea')?.hasError('required')">
+              **Total Area is required
+            </small>
+            <small class="text-red-600 text-sm font-bold" *ngIf="sanctuaryForm.get('totalArea')?.hasError('range')">
+              **Total area must be greater than 0.
+            </small>
+          </div>   
+      </div>
+
+      <div class="mb-4">
+        <label for="habitatType" class="block text-sm font-medium text-gray-600">Habitat Type</label>
+        <input
+          id="habitatType"
+          formControlName="habitatType"
+          type="text"
+          class="mt-1 block w-full px-3 py-2 border rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+          placeholder="Enter Habitat Type"
+        />  
+        <div *ngIf="sanctuaryForm.get('habitatType')?.invalid && sanctuaryForm.get('habitatType')?.touched">
+            <small class="text-red-600 text-sm font-bold" *ngIf="sanctuaryForm.get('habitatType')?.hasError('required')">
+              **Total Area is required
+            </small>
+           
+          </div>       
+      </div>
+
+      <div class="mb-4">
+        <label for="protectedSpecies" class="block text-sm font-medium text-gray-600">Protected Species</label>
+        <input
+          id="protectedSpecies"
+          formControlName="protectedSpecies"
+          type="text"
+          class="mt-1 block w-full px-3 py-2 border rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+          placeholder="Enter Protected Species"
+        />      
+      </div>
+
+      <div class="mb-4">
+        <label for="status" class="block text-sm font-medium text-gray-600">Status</label>
+        <select
+          id="status"
+          formControlName="status"
+          class="mt-1 block w-full px-3 py-2 border rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+        >
+          <option value="Active">Active</option>
+          <option value="Inactive">Inactive</option>
+        </select>
+        <div *ngIf="sanctuaryForm.get('status')?.invalid && sanctuaryForm.get('status')?.touched">
+          <small class="text-red-600 text-sm font-bold" *ngIf="sanctuaryForm.get('status')?.hasError('required')">
+            **Status is required
+          </small>
+        </div>
+      </div>
+      
+      <div>
+        <button
+          type="submit"
+          [disabled]="sanctuaryForm.invalid"
+          class="w-full bg-green-600 text-white py-2 px-4 rounded-md hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2"
+        >
+        {{ isEditMode ? 'Update Sanctuary' : 'Add Sanctuary' }}
+        </button>
+      </div>
+      
+
+     </form>
+
+    </div>
+  </div>
+  

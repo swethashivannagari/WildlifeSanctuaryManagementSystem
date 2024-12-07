@@ -1,0 +1,100 @@
+<div class="container mx-auto p-6">
+    <div class="m-2 flex justify-between items-center flex-wrap gap-4">
+      <h2 class="text-2xl font-bold text-gray-800">Wildlife Sanctuary Animals</h2>
+      <button
+        (click)="addAnimal()"
+        class="px-6 py-2 rounded-lg shadow-md text-white bg-blue-600 hover:bg-blue-700"
+      >
+        Add Animal
+      </button>
+    </div>
+  
+    <div class="min-w-full bg-white border border-gray-300 rounded-lg shadow">
+      <!-- Table Header -->
+      <div class="hidden md:grid md:grid-cols-6 font-bold text-xl">
+        <p class="col-span-2 py-2 px-4 text-left text-gray-600">Species</p>
+        <p class="py-2 px-4 text-left text-gray-600">Age</p>
+        <p class="py-2 px-4 text-left text-gray-600">Health Status</p>
+        <p class="py-2 px-4 text-center text-gray-600">Actions</p>
+        <p class="py-2 px-4 text-center text-gray-600">Details</p>
+      </div>
+  
+      <!-- Rows -->
+      <div
+        *ngFor="let animal of animals; let i = index"
+        [ngClass]="{ 'bg-gray-100': i % 2 === 0, 'bg-white': i % 2 !== 0 }"
+      >
+        <div
+          class="grid grid-cols-1 md:grid-cols-6 gap-4 p-4 border-b"
+        >
+          <!-- Responsive Species Field -->
+          <div class="col-span-2">
+            <p class="font-bold md:hidden text-gray-800">Species:</p>
+            <p>{{ animal.species }}</p>
+          </div>
+  
+          <!-- Responsive Age Field -->
+          <div>
+            <p class="font-bold md:hidden text-gray-600">Age:</p>
+            <p>{{ animal.age }} years</p>
+          </div>
+  
+          <!-- Responsive Health Status -->
+          <div>
+            <p class="font-bold md:hidden text-gray-600">Health Status:</p>
+            <p
+              [ngClass]="{
+                'text-green-600': animal.healthStatus === 'Healthy',
+                'text-yellow-600': animal.healthStatus === 'Under Observation',
+                'text-red-700': animal.healthStatus === 'Critical',
+                'text-red-400': animal.healthStatus === 'Injured'
+              }"
+            >
+              {{ animal.healthStatus }}
+            </p>
+          </div>
+  
+          <!-- Responsive Actions -->
+          <div class="text-center">
+            <p class="font-bold md:hidden text-gray-600">Actions:</p>
+            <button
+              (click)="editAnimal(animal.animalId)"
+              class="text-yellow-500 hover:text-yellow-700"
+            >
+              <i class="fa fa-edit text-xl"></i>
+            </button>
+            <button
+              (click)="deleteAnimal(animal.animalId)"
+              class="text-red-500 hover:text-red-700 ml-4"
+            >
+              <i class="fa fa-trash text-xl"></i>
+            </button>
+          </div>
+  
+          <!-- Responsive Details Button -->
+          <div class="text-center">
+            <p class="font-bold md:hidden text-gray-600">Details:</p>
+            <button
+              (click)="toggleDetails(i)"
+              class="text-blue-500 hover:text-blue-700"
+            >
+              <i
+                class="fa"
+                [ngClass]="expandedAnimal === i ? 'fa-chevron-up' : 'fa-chevron-down'"
+              ></i>
+            </button>
+          </div>
+        </div>
+  
+        <!-- Expanded Details -->
+        <div *ngIf="expandedAnimal === i" class="bg-gray-100 p-4">
+          <div class="mx-4">
+            <p><strong>Gender:</strong> {{ animal.gender }}</p>
+            <p><strong>Current Location:</strong> {{ animal.currentLocation }}</p>
+            <p><strong>Last Checkup:</strong> {{ animal.lastCheckupDate | date: 'dd-MMM-yyyy' }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  

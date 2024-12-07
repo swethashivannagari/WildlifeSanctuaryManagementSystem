@@ -1,0 +1,15 @@
+<div class="flex h-screen ">
+     <!-- Sidebar -->
+  <app-sidebar [class.-translate-x-full]="isSidebarCollapsed"></app-sidebar>
+
+  <!-- Main Content -->
+  <div class="flex-grow flex flex-col">
+    <!-- Navbar -->
+    <app-navbar (sidebarToggle)="toggleSidebar()"></app-navbar>
+
+      <!-- Dynamic Content -->
+      <div class="flex-1  overflow-y-auto bg-gray-200 p-4 ml-12 lg:ml-1">
+        <router-outlet></router-outlet>
+      </div>
+    </div>
+  </div>

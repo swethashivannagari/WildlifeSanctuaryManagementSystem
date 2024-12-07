@@ -1,0 +1,58 @@
+<div class=" bg-gray-100 flex justify-center items-center p-10 ">
+    <div class=" p-8 rounded-lg shadow-lg w-full max-w-md">
+       <h1 class="text-2xl font-bold mb-4">Report Management</h1>
+  
+    <!-- Form -->
+    <form [formGroup]="reportForm" (ngSubmit)="onReportFormSubmit()" class="p-4 shadow rounded mb-6">
+      <div class="mb-4">
+        <label for="type" class="block text-sm font-medium">Report Type</label>
+        <input
+          id="type"
+          formControlName="type"
+          type="text"
+          class="mt-1 block w-full px-3 py-2 border border-gray-400 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+          placeholder="Enter report type"
+        />
+      </div>
+  
+      <div class="mb-4">
+        <label for="generatedDate" class="block text-sm font-medium">Generated Date</label>
+        <input
+          id="generatedDate"
+          formControlName="generatedDate"
+          type="date"
+          class="mt-1 block w-full px-3 py-2 border border-gray-400 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+        />
+      </div>
+  
+      <div class="mb-4">
+        <label for="data" class="block text-sm font-medium">Data</label>
+        <textarea
+          id="data"
+          formControlName="data"
+          rows="5"
+          class="mt-1 block w-full px-3 py-2 border border-gray-400 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+          placeholder="Enter report data"
+        ></textarea>
+      </div>
+  
+  
+      <button
+        type="submit"
+        class="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600"
+      >
+        {{ isEditMode ? 'Update' : 'Create' }} Report
+      </button>
+      <button
+        type="button"
+        (click)="resetForm()"
+        class="ml-4 bg-gray-500 text-white py-2 px-4 rounded hover:bg-gray-600"
+      >
+        Reset
+      </button>
+    </form>
+  
+ </div>
+
+  </div>
+  

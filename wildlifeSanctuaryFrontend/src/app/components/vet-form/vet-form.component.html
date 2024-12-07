@@ -1,0 +1,99 @@
+<div class="flex justify-center items-center min-h-screen bg-gray-100">
+    <div class="bg-white p-8 rounded-lg shadow-lg w-full max-w-md">
+      <h2 class="text-2xl font-semibold text-center text-gray-700 mb-6">
+        {{ isEditMode ? 'Edit Medical Record' : 'Add Medical Record' }}
+      </h2>
+  
+      <form [formGroup]="medicalRecordForm" (ngSubmit)="onSubmitMedicalRecord()">
+        <!-- Animal ID -->
+        <div class="mb-4">
+          <label for="animalId" class="block text-sm font-medium text-gray-600">Animal ID</label>
+          <input
+            id="animalId"
+            formControlName="animalId"
+            type="number"
+            class="mt-1 block w-full px-3 py-2 border rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+            placeholder="Enter animal ID"
+          />
+          <div *ngIf="medicalRecordForm.get('animalId')?.invalid && medicalRecordForm.get('animalId')?.touched">
+            <small class="text-red-600 text-sm font-bold">
+              **Animal ID is required
+            </small>
+          </div>
+        </div>
+  
+        <!-- Date -->
+        <div class="mb-4">
+          <label for="date" class="block text-sm font-medium text-gray-600">Date</label>
+          <input
+            id="date"
+            formControlName="date"
+            type="date"
+            class="mt-1 block w-full px-3 py-2 border rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+          />
+          <div *ngIf="medicalRecordForm.get('date')?.invalid && medicalRecordForm.get('date')?.touched">
+            <small class="text-red-600 text-sm font-bold">
+              **Date is required
+            </small>
+          </div>
+        </div>
+  
+        <!-- Diagnosis -->
+        <div class="mb-4">
+          <label for="diagnosis" class="block text-sm font-medium text-gray-600">Diagnosis</label>
+          <textarea
+            id="diagnosis"
+            formControlName="diagnosis"
+            class="mt-1 block w-full px-3 py-2 border rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+            placeholder="Enter diagnosis"
+          ></textarea>
+          <div *ngIf="medicalRecordForm.get('diagnosis')?.invalid && medicalRecordForm.get('diagnosis')?.touched">
+            <small class="text-red-600 text-sm font-bold">
+              **Diagnosis is required and should not exceed 200 characters
+            </small>
+          </div>
+        </div>
+  
+        <!-- Treatment -->
+        <div class="mb-4">
+          <label for="treatment" class="block text-sm font-medium text-gray-600">Treatment</label>
+          <textarea
+            id="treatment"
+            formControlName="treatment"
+            class="mt-1 block w-full px-3 py-2 border rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+            placeholder="Enter treatment details"
+          ></textarea>
+          <div *ngIf="medicalRecordForm.get('treatment')?.invalid && medicalRecordForm.get('treatment')?.touched">
+            <small class="text-red-600 text-sm font-bold">
+              **Treatment is required and should not exceed 500 characters
+            </small>
+          </div>
+        </div>
+  
+      
+  
+        <!-- Next Checkup -->
+        <div class="mb-4">
+          <label for="nextCheckup" class="block text-sm font-medium text-gray-600">Next Checkup</label>
+          <input
+            id="nextCheckup"
+            formControlName="nextCheckup"
+            type="date"
+            class="mt-1 block w-full px-3 py-2 border rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+          />
+        </div>
+  
+        <!-- Submit Button -->
+        <div>
+          <button
+            type="submit"
+            [disabled]="medicalRecordForm.invalid"
+            class="w-full bg-indigo-600 text-white py-2 px-4 rounded-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+          >
+            {{ isEditMode ? 'Update Record' : 'Add Record' }}
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+  

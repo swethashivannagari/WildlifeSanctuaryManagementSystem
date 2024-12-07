@@ -1,0 +1,110 @@
+
+<div class="flex justify-center p-10   bg-gray-100">
+    <div class="bg-white p-8 rounded-lg shadow-lg w-full max-w-md">
+      <div class="text-blue-500 font-bold text-xl">{{statusMessage}}</div>
+      <h2 class="text-2xl font-bold mb-6 text-center">
+        {{ isEditMode ? "Edit Wildlife Data Details" : "Add Wildlife Data" }}
+      </h2>
+  
+      <form (ngSubmit)="onSubmitWildlifeData()" [formGroup]="wildlifeDataForm">
+        <!-- Sanctuary ID -->
+        <div class="mb-4">
+          <label for="sanctuaryId" class="mb-1 block text-sm font-medium">Sanctuary ID</label>
+          <input
+            type="number"
+            id="sanctuaryId"
+            formControlName="sanctuaryId"
+            class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+          />
+          <div *ngIf="wildlifeDataForm.get('sanctuaryId')?.invalid && wildlifeDataForm.get('sanctuaryId')?.touched">
+            <small class="text-red-600 text-sm font-bold" *ngIf="wildlifeDataForm.get('sanctuaryId')?.hasError('required')">
+              **Sanctuary ID is required
+            </small>
+          </div>
+        </div>
+  
+        <!-- Species -->
+        <div class="mb-4">
+          <label for="species" class="mb-1 block text-sm font-medium">Species</label>
+          <input
+            type="text"
+            id="species"
+            formControlName="species"
+            maxlength="100"
+            class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+          />
+          <div *ngIf="wildlifeDataForm.get('species')?.invalid && wildlifeDataForm.get('species')?.touched">
+            <small class="text-red-600 text-sm font-bold" *ngIf="wildlifeDataForm.get('species')?.hasError('required')">
+              **Species is required
+            </small>
+          </div>
+        </div>
+  
+        <!-- Observation Date -->
+        <div class="mb-4">
+          <label for="observationDate" class="mb-1 block text-sm font-medium">Observation Date</label>
+          <input
+            type="date"
+            id="observationDate"
+            formControlName="observationDate"
+            class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+          />
+          <div *ngIf="wildlifeDataForm.get('observationDate')?.invalid && wildlifeDataForm.get('observationDate')?.touched">
+            <small class="text-red-600 text-sm font-bold" *ngIf="wildlifeDataForm.get('observationDate')?.hasError('required')">
+              **Observation Date is required
+            </small>
+          </div>
+        </div>
+  
+        <!-- Behavioral Report -->
+        <div class="mb-4">
+          <label for="behavioralReport" class="mb-1 block text-sm font-medium">Behavioral Report</label>
+          <textarea
+            id="behavioralReport"
+            formControlName="behavioralReport"
+            maxlength="500"
+            class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+          ></textarea>
+        </div>
+  
+        <!-- Population Estimate -->
+        <div class="mb-4">
+          <label for="populationEstimate" class="mb-1 block text-sm font-medium">Population Estimate (Optional)</label>
+          <input
+            type="number"
+            id="populationEstimate"
+            formControlName="populationEstimate"
+            class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+          />
+        </div>
+  
+        <!-- Biologist ID
+        <div class="mb-4">
+          <label for="biologistId" class="mb-1 block text-sm font-medium">Biologist ID</label>
+          <input
+            type="number"
+            id="biologistId"
+            formControlName="biologistId"
+            class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+          />
+          <div *ngIf="wildlifeDataForm.get('biologistId')?.invalid && wildlifeDataForm.get('biologistId')?.touched">
+            <small class="text-red-600 text-sm font-bold" *ngIf="wildlifeDataForm.get('biologistId')?.hasError('required')">
+              **Biologist ID is required
+            </small>
+          </div>
+        </div> -->
+  
+        <!-- Submit Button -->
+        <div class="my-2">
+          <button
+            type="submit"
+            [disabled]="wildlifeDataForm.invalid"
+            class="w-full bg-blue-600 text-white py-2 px-4 rounded hover:bg-blue-700 focus:outline-none focus:ring focus:ring-blue-300"
+          >
+            Submit Wildlife Data
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+  

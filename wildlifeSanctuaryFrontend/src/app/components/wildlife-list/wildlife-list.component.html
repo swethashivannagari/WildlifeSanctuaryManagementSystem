@@ -1,0 +1,46 @@
+<div class="flex justify-center h-[calc(100vh-4rem)] overflow-x-auto overflow-y-hidden">
+    <div class="lg:w-full bg-white p-4 rounded-lg shadow-lg overflow-auto">
+      <h3 class="text-lg font-bold text-gray-800 mb-4">Recent Observations</h3>
+      
+      <!-- No Records Message -->
+      <div *ngIf="!recentRecords.length" class="text-center lg:p-32  lg:text-2xl font-semibold text-gray-600">
+        No Records Found
+      </div>
+          
+      <!-- Table for Recent Observations -->
+      <div *ngIf="recentRecords.length" class="overflow-x-auto">
+        <table class="min-w-full table-auto">
+          <thead class="bg-gray-200 text-gray-700">
+            <tr>
+              <th class="px-4 py-2 text-left">Species</th>
+              <th class="px-4 py-2 text-left">Date</th>
+              <th class="px-4 py-2 text-left">Behavioral Report</th>
+              <th class="px-4 py-2 text-left">Population</th>
+              <th class="px-4 py-2 text-left">Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let record of recentRecords" class="border-b">
+              <td class="px-4 py-2">{{ record.species }}</td>
+              <td class="px-4 py-2">{{ record.observationDate | date }}</td>
+              <td class="px-4 py-2">{{ record.behavioralReport }}</td>
+              <td class="px-4 py-2">{{ record.populationEstimate }}</td>
+              <td class="px-4 py-2">
+                <button 
+                  (click)="editObservation(record.dataId ?? 0)" 
+                  class="text-blue-500 hover:text-blue-700">
+                  <i class="fa fa-edit"></i> 
+                </button>
+                <button 
+                  class="text-red-500 hover:text-red-700 ml-4"
+                  (click)="deleteObservation(record.dataId ?? 0)">
+                  <i class="fa fa-trash"></i> 
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  

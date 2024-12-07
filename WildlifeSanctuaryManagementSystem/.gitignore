@@ -1,0 +1,18 @@
+﻿# Ignore Visual Studio temporary files, build results, and
+# other generated files.
+
+/bin/
+/obj/
+/*.user
+/*.suo
+/.vs/
+/packages/
+*.dll
+*.pdb
+*.exe
+*.cache
+*.log
+*.ide
+*.db
+.vscode/
+appsettings.json

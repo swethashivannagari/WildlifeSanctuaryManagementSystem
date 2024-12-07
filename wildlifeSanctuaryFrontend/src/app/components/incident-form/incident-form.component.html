@@ -1,0 +1,77 @@
+<div class=" flex justify-center items-center p-5 bg-gradient-to-r from-blue-100 via-gray-100 to-white p-6 rounded-lg shadow-lg">
+  <div class="bg-gray-100 p-8 rounded-lg shadow w-full max-w-md my-6 py-6">
+
+
+    <div class="text-blue-500 font-bold text-xl">{{statusmessage}}</div>
+    <h2 class="text-2xl font-bold mb-6 text-gray-800 text-center">{{isEditMode?"Edit Incident Details":"Add Incident"}}
+    </h2>
+
+    <form (ngSubmit)="onSubmitIncident()" [formGroup]="incidentForm">
+      <!-- Sanctuary ID -->
+      <div class="mb-4">
+        <label for="sanctuaryId" class="mb-1 block text-sm font-medium">Sanctuary ID</label>
+        <input type="number" id="sanctuaryId" formControlName="sanctuaryId"
+          class="mt-1 block w-full px-3 py-2 border rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" />
+        <div *ngIf="incidentForm.get('sanctuaryId')?.invalid && incidentForm.get('sanctuaryId')?.touched">
+          <small class="text-red-600 text-sm font-bold" *ngIf="incidentForm.get('sanctuaryId')?.hasError('required')">
+            **Sanctuary ID is required
+          </small>
+        </div>
+      </div>
+
+      <!-- Date -->
+      <div class="mb-4">
+        <label for="date" class="mb-1 block text-sm font-medium">Incident Date</label>
+        <input type="date" id="date" formControlName="date"
+          class="mt-1 block w-full px-3 py-2 border rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" />
+        <div *ngIf="incidentForm.get('date')?.invalid && incidentForm.get('date')?.touched">
+          <small class="text-red-600 text-sm font-bold" *ngIf="incidentForm.get('date')?.hasError('required')">
+            **Date is required
+          </small>
+        </div>
+      </div>
+
+      <!-- Description -->
+      <div class="mb-4">
+        <label for="description" class="mb-1 block text-sm font-medium">Description</label>
+        <textarea id="description" formControlName="description" rows="3"
+          class="mt-1 block w-full px-3 py-2 border rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+          placeholder="Describe the incident..."></textarea>
+        <div *ngIf="incidentForm.get('description')?.invalid && incidentForm.get('description')?.touched">
+          <small class="text-red-600 text-sm font-bold" *ngIf="incidentForm.get('description')?.hasError('required')">
+            **Description is required
+          </small>
+          <small class="text-red-600 text-sm font-bold" *ngIf="incidentForm.get('description')?.hasError('maxlength')">
+            **Description cannot exceed 500 characters.
+          </small>
+        </div>
+      </div>
+
+      <!-- Severity -->
+      <div class="mb-4">
+        <label for="severity" class="mb-1 block text-sm font-medium">Severity</label>
+        <select id="severity" formControlName="severity"
+          class="mt-1 block w-full px-3 py-2 border rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+          <option value="" disabled>Select Severity</option>
+          <option value="Low">Low</option>
+          <option value="Medium">Medium</option>
+          <option value="High">High</option>
+          <option value="Critical">Critical</option>
+        </select>
+        <div *ngIf="incidentForm.get('severity')?.invalid && incidentForm.get('severity')?.touched">
+          <small class="text-red-600 text-sm font-bold" *ngIf="incidentForm.get('severity')?.hasError('required')">
+            **Severity is required
+          </small>
+        </div>
+      </div>
+
+      <!-- Submit Button -->
+      <div class="my-4">
+        <button type="submit" [disabled]="incidentForm.invalid"
+          class="w-full bg-blue-600 text-white py-2 px-4 rounded hover:bg-blue-700 focus:outline-none focus:ring focus:ring-blue-300">
+          Submit Incident
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

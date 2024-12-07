@@ -1,0 +1,102 @@
+<div class="min-h-screen bg-gradient-to-r from-green-50 to-green-100 flex items-center justify-center p-6">
+  <div class="w-full max-w-lg bg-white shadow-lg rounded-lg py-4 px-6">
+    
+  <h2 class="text-2xl font-bold text-center text-green-700 mb-6">{{isEditMode?'Edit Animal Details':'Add
+            Animal'}} </h2>
+
+
+        <form [formGroup]="animalForm" (ngSubmit)="onAnimalFormSubmit()">
+            <div class="mb-4">
+                <label for="species" class="block text-sm font-medium">Species</label>
+                <input id="species" type="text" class="  mt-1 block w-full px-3 py-2 border rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" formControlName="species"
+                    placeholder="Enter species" />
+                <p *ngIf="animalForm.get('species')?.invalid && animalForm.get('species')?.touched"
+                    class="text-red-600 text-sm font-bold">
+                    **Species is required and must not exceed 100 characters.
+                </p>
+            </div>
+
+            <div class="mb-4">
+                <label for="age" class="block text-sm font-medium">Age</label>
+                <input id="age" type="number" class="mt-1 block w-full px-3 py-2 border rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" formControlName="age" placeholder="Enter age" />
+                <p *ngIf="animalForm.get('age')?.invalid && animalForm.get('age')?.touched"
+                    class="text-red-600 text-sm font-bold">
+                    **Age is required and must be a positive number.
+                </p>
+            </div>
+
+            <div class="mb-4">
+                <label class="block text-sm font-medium">Gender</label>
+                <div class="mt-2 flex items-center space-x-4">
+                  <label class="inline-flex items-center">
+                    <input 
+                      type="radio" 
+                      formControlName="gender" 
+                      value="Male" 
+                      class="form-radio h-4 w-4 text-indigo-600 focus:ring-indigo-500"
+                    />
+                    <span class="ml-2 text-sm">Male</span>
+                  </label>
+                  <label class="inline-flex items-center">
+                    <input 
+                      type="radio" 
+                      formControlName="gender" 
+                      value="Female" 
+                      class="form-radio h-4 w-4 text-indigo-600 focus:ring-indigo-500"
+                    />
+                    <span class="ml-2 text-sm">Female</span>
+                  </label>
+                </div>
+                <p *ngIf="animalForm.get('gender')?.invalid && animalForm.get('gender')?.touched" class="text-red-600 text-sm font-bold mt-2">
+                  **Gender is required.
+                </p>
+              </div>
+              
+
+            <div class="mb-4">
+                <label for="healthStatus" class="block text-sm font-medium">Health Status</label>
+                <select 
+                  id="healthStatus" 
+                  formControlName="healthStatus" 
+                  class="mt-1 block w-full px-3 py-2 border rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                >
+                  <option value="" disabled>Select health status</option>
+                  <option value="Healthy">Healthy</option>
+                  <option value="Injured">Injured</option>
+                  <option value="Sick">Sick</option>
+                  <option value="Critical">Critical</option>
+                </select>
+                <p *ngIf="animalForm.get('healthStatus')?.invalid && animalForm.get('healthStatus')?.touched" class="text-red-600 text-sm font-bold mt-2">
+                  **select Health status.
+                </p>
+              </div>
+
+            <div class="mb-4">
+                <label for="currentLocation" class="block text-sm font-medium">Current Location</label>
+                <input id="currentLocation" type="text" class="mt-1 block w-full px-3 py-2 border rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" formControlName="currentLocation"
+                    placeholder="Enter current location" />
+            </div>
+
+            <div class="mb-4">
+                <label for="lastCheckupDate" class="block text-sm font-medium">Last Checkup Date</label>
+                <input id="lastCheckupDate" type="date" class="mt-1 block w-full px-3 py-2 border rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" formControlName="lastCheckupDate" />
+            </div>
+
+            <div class="mb-6">
+                <label for="sanctuaryId" class="block text-sm font-medium">Sanctuary ID</label>
+                <input id="sanctuaryId" type="number" class="mt-1 block w-full px-3 py-2 border rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" formControlName="sanctuaryId"
+                    placeholder="Enter sanctuary ID" />
+            </div>
+
+            <div>
+                <button
+                  type="submit"
+                  [disabled]="animalForm.invalid"
+                  class="w-full bg-green-600 text-white py-2 px-4 rounded-md hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2"
+                >
+                {{ isEditMode ? 'Update Animal' : 'Add Animal' }}
+                </button>
+              </div>
+        </form>
+    </div>
+    </div>

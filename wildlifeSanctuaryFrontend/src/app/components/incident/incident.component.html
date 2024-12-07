@@ -1,0 +1,101 @@
+<div class="bg-white p-6 rounded-lg shadow-lg">
+  <!-- Title and Add Incident Button (Visible only for Rangers) -->
+  <div class="flex justify-between items-center">
+    <h2 class="text-xl font-bold text-gray-800">Incidents</h2>
+    <button 
+      *ngIf="role === 'Ranger'" 
+      (click)="addIncident()" 
+      class="bg-blue-500 text-white px-4 py-2 rounded-md">
+      Add Incident
+    </button>
+  </div>
+
+  <!-- Filter Controls (Visible only for Rangers) -->
+  <div *ngIf="role === 'Ranger'" class="flex gap-4 mt-4">
+    <select [(ngModel)]="selectedSeverity" class="border px-4 py-2 rounded-md" (change)="filterIncidents()">
+      <option value="">All Severities</option>
+      <option value="High">High</option>
+      <option value="Medium">Medium</option>
+      <option value="Low">Low</option>
+    </select>
+
+    <select [(ngModel)]="selectedResolutionStatus" class="border px-4 py-2 rounded-md" (change)="filterIncidents()">
+      <option value="">All Statuses</option>
+      <option value="Resolved">Resolved</option>
+      <option value="Unresolved">Unresolved</option>
+      <option value="In Progress">In Progress</option>
+      <option value="Closed">Closed</option>
+    </select>
+  </div>
+
+  <!-- No Data Message -->
+  <div *ngIf="incidents.length === 0" class="text-center mt-6 text-gray-500">
+    <p *ngIf="role === 'Ranger'" class="font-semibold text-2xl">No incidents available. Please add one to show.</p>
+
+    <!-- Important Information Section (Visible when no incidents) -->
+    <div class="bg-white p-6 rounded-lg shadow-lg mt-6" style="background-image: url('../../assets/images/sanctuary.jpg'); background-size: cover; background-position: center;">
+      <h2 class="text-xl font-bold text-white">Important Information</h2>
+      <div class="mt-4 text-white">
+        <p class="font-semibold text-lg">Sanctuaries are vital for preserving our natural ecosystems and wildlife...</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Incidents Table (Visible when there are incidents) -->
+  <div *ngIf="incidents.length > 0" class="mt-4 overflow-x-auto max-h-[500px]">
+    <table class="min-w-full table-auto">
+      <thead>
+        <tr class="bg-gray-200">
+          <th class="border px-4 py-2">S.No</th>
+          <th class="border px-4 py-2">Description</th>
+          <th class="border px-4 py-2">Sanctuary</th>
+          <th class="border px-4 py-2">Date</th>
+          <th class="border px-4 py-2">Severity</th>
+          <th class="border px-4 py-2">Resolution Status</th>
+          <th class="border px-4 py-2">Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let incident of incidents; let i = index">
+          <td class="border px-4 py-2">{{ i + 1 }}</td>
+          <td class="border px-4 py-2">{{ incident.description }}</td>
+          <td class="border px-4 py-2">{{ incident.sanctuaryId }}</td>
+          <td class="border px-4 py-2">{{ incident.date | date }}</td>
+          <td class="border px-4 py-2">{{ incident.severity }}</td>
+          <td class="border px-4 py-2">
+            <!-- Resolution Status (Editable only for Admin/Manager) -->
+            <span>{{ incident.resolutionStatus }}</span>
+            <select 
+              *ngIf="role === 'Admin' || role === 'Manager'" 
+              [(ngModel)]="incident.resolutionStatus" 
+              class="border px-2 py-1 rounded"
+              (change)="updateResolutionStatus(incident)">
+              <option value="">{{ incident.resolutionStatus }}</option>
+              <option value="Resolved">Resolved</option>
+              <option value="Unresolved">Unresolved</option>
+              <option value="In Progress">In Progress</option>
+              <option value="Closed">Closed</option>
+            </select>
+            <!-- Display status (Visible for Ranger) -->
+            
+          </td>
+          <td class="border px-4 py-2">
+            <!-- Edit and Delete Buttons (Visible for Ranger) -->
+            <button 
+              *ngIf="role === 'Ranger'" 
+              (click)="editIncident(incident.incidentId ?? 0)" 
+              class="text-blue-500 hover:text-blue-700">
+              <i class="fa fa-edit"></i>
+            </button>
+            <button 
+               
+              (click)="deleteIncident(incident.incidentId ?? 0)" 
+              class="text-red-500 hover:text-red-700 ml-4">
+              <i class="fa fa-trash"></i>
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

@@ -1,0 +1,88 @@
+<div  class="flex justify-center items-center min-h-screen bg-cover bg-center bg-no-repeat" style="background-image: url('../../../assets/images/budget.jpeg');">
+    
+    <div class="bg-white p-8 rounded-lg shadow-lg w-full max-w-md">
+      <div class="text-blue-500 font-bold text-xl">{{statusmessage}}</div>
+      <h2 class="text-2xl font-bold mb-6 text-center">{{isEditMode ? "Edit Expenses Details" : "Add Expenses"}}</h2>
+  
+      <form (ngSubmit)="onSubmitCost()" [formGroup]="costManagementForm">
+        <!-- Sanctuary ID -->
+        <div class="mb-4">
+          <label for="sanctuaryId" class="mb-1 block text-sm font-medium">Sanctuary ID</label>
+          <input
+            type="number"
+            id="sanctuaryId"
+            formControlName="sanctuaryId"
+            class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+          />
+          <div *ngIf="costManagementForm.get('sanctuaryId')?.invalid && costManagementForm.get('sanctuaryId')?.touched">
+            <small class="text-red-600 text-sm font-bold" *ngIf="costManagementForm.get('sanctuaryId')?.hasError('required')">
+              **Sanctuary ID is required
+            </small>
+          </div>
+        </div>
+  
+        <!-- Expense Type -->
+        <div class="mb-4">
+          <label for="expenseType" class="mb-1 block text-sm font-medium">Expense Type</label>
+          <input
+            type="text"
+            id="expenseType"
+            formControlName="expenseType"
+            maxlength="100"
+            class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+          />
+          <div *ngIf="costManagementForm.get('expenseType')?.invalid && costManagementForm.get('expenseType')?.touched">
+            <small class="text-red-600 text-sm font-bold" *ngIf="costManagementForm.get('expenseType')?.hasError('required')">
+              **Expense Type is required
+            </small>
+          </div>
+        </div>
+  
+        <!-- Amount -->
+        <div class="mb-4">
+          <label for="amount" class="mb-1 block text-sm font-medium">Amount</label>
+          <input
+            type="number"
+            id="amount"
+            formControlName="amount"
+            class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+          />
+          <div *ngIf="costManagementForm.get('amount')?.invalid && costManagementForm.get('amount')?.touched">
+            <small class="text-red-600 text-sm font-bold" *ngIf="costManagementForm.get('amount')?.hasError('required')">
+              **Amount is required
+            </small>
+          </div>
+        </div>
+  
+        
+  
+        <!-- Responsible Person -->
+        <div class="mb-4">
+          <label for="responsiblePersonId" class="mb-1 block text-sm font-medium">Responsible Person</label>
+          <input
+            type="number"
+            id="responsiblePersonId"
+            formControlName="responsiblePersonId"
+            class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+          />
+          <div *ngIf="costManagementForm.get('responsiblePersonId')?.invalid && costManagementForm.get('responsiblePersonId')?.touched">
+            <small class="text-red-600 text-sm font-bold" *ngIf="costManagementForm.get('responsiblePersonId')?.hasError('required')">
+              **Responsible Person is required
+            </small>
+          </div>
+        </div>
+  
+        <!-- Submit Button -->
+        <div class="my-4">
+          <button
+            type="submit"
+            [disabled]="costManagementForm.invalid"
+            class="w-full bg-blue-600 text-white py-2 px-4 rounded hover:bg-blue-700 focus:outline-none focus:ring focus:ring-blue-300"
+          >
+            Submit Cost Management
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+  

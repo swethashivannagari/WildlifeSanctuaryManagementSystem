@@ -1,0 +1,108 @@
+<div
+    class="my-background bg-cover bg-center flex flex-col   bg-gray-200 p-2 overflow-hidden">
+    <!-- Main Container -->
+    <div class="w-full max-w-screen-2xl mx-auto md:px-4 sm:px-6 bg-gray-200 min-h-[200px]">
+        <div class="grid grid-cols-12 gap-3 p-4">
+            <!-- Top Left Card -->
+            <div class="col-span-12 lg:col-span-3 bg-cover bg-center p-4 rounded shadow relative h-auto "
+                style="background-image: url('../../assets/images/vetbg.jpg');">
+                <div class="absolute inset-0 bg-cover bg-center filter  bg-opacity-50"></div>
+                <div class="py-6 bg-gray-100  justify-center text-gray-800 bg-opacity-50 font-bold">
+                    <h3 class="text-3xl">Hello Vet!!!</h3>
+                    <h3 class="font-semibold text-xl">Welcome to sanctuary Mangement </h3>
+                    <p></p>
+                </div>
+            </div>
+
+            <div class="col-span-12 lg:col-span-3 flex flex-col gap-2">
+
+                <!-- Number of Records -->
+                <div class="bg-white p-6 rounded-lg shadow-lg border border-gray-200 flex items-center">
+                    <div class="bg-blue-100 p-3 rounded-full text-blue-600 mr-4">
+                        <i class="fas fa-book-open text-4xl"></i>
+                    </div>
+                    <div>
+                        <h3 class="text-lg font-semibold text-gray-700">Number of Records</h3>
+                        <p class="text-3xl font-bold text-gray-800">{{recordCount}}</p>
+                    </div>
+                </div>
+
+                <!-- Add Record Button -->
+                <div
+                    class="bg-green-50 p-2 rounded-lg shadow-lg border border-green-200 flex items-center justify-between lg:flex-col">
+                    <div class="flex items-center">
+                        <button (click)="addRecord()"
+                            class="bg-green-500 text-white py-2 px-4 rounded-full hover:bg-green-600 transition-all">
+                            <i class="fas fa-plus-circle mr-2"></i>
+                            
+                            Add Record
+                        </button>
+                    </div>
+                    <div>
+                        <span class="text-gray-500 text-sm">Quickly add new records to the system</span>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Alerts Section -->
+            <div
+                class="col-span-12 lg:col-span-3 bg-white p-6 rounded-lg shadow-lg border border-gray-200 flex flex-col">
+                <h3 class="text-2xl font-semibold text-gray-800 mb-4 flex items-center">
+                    <span class="mr-2 text-yellow-600">
+                        <i class="fas fa-exclamation-circle text-red-500 text-2xl"></i>
+                    </span>
+                    Alerts
+                </h3>
+                <h2 *ngIf="!criticalAlerts?.length" class="text-lg font-semibold p-4 text-center bg-gray-200 py-10">No Alerts</h2>
+                <ul class="list-disc ml-6 text-gray-600 text-xl">
+                    <li *ngFor="let animal of criticalAlerts">
+                        <strong>{{ animal}} - Critical</strong>
+                      </li>
+                      <li *ngFor="let animal of sickAlerts">
+                        <strong>{{ animal}} - Sick</strong> 
+                      </li>
+                </ul>
+            </div>
+
+            <!-- Schedule Section -->
+            <div
+                class="col-span-12 lg:col-span-3 bg-white p-6 rounded-lg shadow-lg border border-gray-200 flex flex-col">
+                <h3 class="text-2xl font-semibold text-gray-800 mb-4 flex items-center">
+                    <span class="mr-2 text-green-600">
+                        <i class="fas fa-calendar-day text-2xl"></i> <!-- Font Awesome Icon for Schedule -->
+                    </span>
+                    Schedule
+                </h3>
+                <ul class="list-disc ml-6 text-gray-600 text-m">
+                    <li><i class="fas fa-clock text-blue-500 mr-2"></i>Today - Vet Meeting</li>
+                    <li><i class="fas fa-stethoscope text-blue-500 mr-2"></i>Today 12:30 PM - Animal Checkup</li>
+                    <li *ngFor="let schedule of schedules">
+                        <i class="fas fa-stethoscope text-blue-500 mr-2"></i>
+                        {{schedule.date| date:'yyyy-MM-dd'}}- {{schedule.species}} 
+                    </li>
+                </ul>
+            </div>
+
+        </div>
+
+        <!-- Charts and Records Section -->
+        <div class="flex flex-col lg:flex-row gap-2 mt-2">
+            <!-- Charts Section -->
+            <div class="flex flex-col lg:w-1/4 space-y-4 bg-gray-200">
+                <div class="w-full h-52 bg-white rounded-lg flex items-center justify-center py-2">
+                    <canvas id="donutChart" width="100" height="100"></canvas>
+                  </div>
+                  <div class="w-full h-48 bg-white rounded-lg flex items-center justify-center py-2">
+                    <canvas id="barChart" width="100" height="100"></canvas>
+                  </div>
+            </div>
+
+            <!-- Medical Records Section -->
+            <div class="bg-gray-200 p-4 rounded shadow-lg overflow-auto lg:w-3/4">
+                
+                <app-medical-records></app-medical-records>
+            </div>
+        </div>
+    </div>
+</div>

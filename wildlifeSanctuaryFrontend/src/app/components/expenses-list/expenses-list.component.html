@@ -1,0 +1,99 @@
+<div class="p-4">
+  <div class="flex justify-between mb-4">
+    <h1 class="text-2xl font-bold mb-2">Budgets</h1>
+    <h2 class="text-xl font-semibold text-gray-500 mb-4">Expenses of Sanctuaries</h2>
+    <button (click)="addExpense()" class="px-3 py-1 bg-blue-500 text-white rounded-lg hover:bg-blue-700">Add Expense</button>
+     </div>
+    <div *ngFor="let sanctuaryName of Object.keys(sanctuaries)" class="bg-white p-4 rounded shadow mb-4">
+      <div class="flex justify-between items-center mb-2">
+        <h2 class="text-lg font-bold">{{ sanctuaryName }}</h2>
+        <div>
+          {{ sanctuaries[sanctuaryName] }} /
+          <span *ngIf="sanctuaries[sanctuaryName] > 0">100000</span>
+        </div>
+      </div>
+      <div class="bg-gray-200 h-2 rounded mb-2">
+        <div
+          class="h-2 rounded"
+          [ngStyle]="{
+            'width': getCappedWidth(sanctuaries[sanctuaryName]) + '%',
+            'background-color': getColor((sanctuaries[sanctuaryName] / 100000) * 100)
+          }"
+        ></div>
+      </div>
+      <div class="flex space-x-2">
+        <button
+          class="bg-blue-500 text-white px-3 py-1 rounded"
+          (click)="viewExpenses(sanctuaryName)"
+        >
+          View Expenses
+        </button>
+      </div>
+    </div>
+  
+   <!-- Modal -->
+   <div
+   *ngIf="selectedExpenses.length > 0"
+   class="fixed inset-0 flex items-center justify-center bg-gray-800 bg-opacity-50 z-50"
+ >
+   <div
+     class="bg-white rounded-lg shadow-lg w-2/3 max-w-lg p-6 relative"
+     style="min-height: 300px; max-height: 80vh; overflow-y: auto; scrollbar-width: none; -ms-overflow-style: none;"
+   >
+    
+     
+ 
+     <!-- Modal Header -->
+     <div class="flex justify-between items-center border-b pb-2 mb-4">
+       <h2 class="text-lg font-bold">Expenses - {{ selectedSanctuary }}</h2>
+       <div class="flex items-center space-x-4">
+         <button
+           class="text-gray-500 hover:text-gray-700"
+           (click)="closeModal()"
+         >
+           ✕
+         </button>
+       </div>
+     </div>
+ 
+     <!-- Modal Body -->
+     <div>
+       <div
+         *ngFor="let expense of selectedExpenses; let i = index"
+         [ngClass]="{ 'bg-gray-100': i % 2 === 0, 'bg-white': i % 2 !== 0 }"
+       >
+         <div class="grid grid-cols-1 md:grid-cols-4 gap-4 p-4 border-b">
+           
+           <div>
+             <p class="font-bold md:hidden text-gray-600">Type:</p>
+             <p>{{ expense.expenseType }}</p>
+           </div>
+ 
+           <div>
+             <p class="font-bold md:hidden text-gray-600">Amount:</p>
+             <p>{{ expense.amount }}</p>
+           </div>
+
+           <div>
+             <p class="font-bold md:hidden text-gray-600">Date:</p>
+             <p>{{ expense.date | date }}</p>
+           </div>
+ 
+           <div class="text-center">
+             <p class="font-bold md:hidden text-gray-600">Actions:</p>
+             <button
+               (click)="deleteExpense(expense.ExpenseId, selectedSanctuary)"
+               class="text-red-500 hover:text-red-700"
+             >
+               <i class="fa fa-trash text-xl"></i>
+             </button>
+           </div>
+         </div>
+       </div>
+     </div>
+   </div>
+ </div>
+ 
+
+
+  

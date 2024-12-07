@@ -1,0 +1,63 @@
+<div class="bg-gray-800 text-white lg:px-2 py-2 flex items-center justify-between shadow-md">
+  <!-- Left Section: Toggle Button (For Mobile) -->
+  <div class="flex items-center space-x-4">
+    <button 
+      class="bg-gray-700 p-2 rounded lg:hidden" 
+      (click)="toggleSidebar()">
+      <i class="fas fa-bars"></i>
+    </button>
+    <h1 class="text-lg font-bold">Dashboard</h1>
+  </div>
+
+  <!-- Right Section: Profile and Notification Icons -->
+  <div class="flex items-center space-x-4">
+    <!-- Notification Icon -->
+    <div class="relative">
+      <i 
+        class="fas fa-bell text-3xl cursor-pointer"
+        (click)="toggleNotificationMenu()">
+      </i>
+      <!-- Notification Dropdown -->
+      <div 
+        *ngIf="isNotificationMenuOpen"
+        class="absolute right-0 mt-2 w-80 bg-white text-gray-800 rounded shadow-lg max-h-96 overflow-y-auto z-50">
+        <ul>
+          <li 
+            *ngFor="let notification of notifications"
+            class="p-4 border-b border-gray-200">
+            <p class="text-sm">{{ notification.message }}</p>
+            <div class="flex justify-between items-center">
+              <button 
+                class="bg-green-500 text-white text-xs px-2 py-1 rounded hover:bg-green-600"
+                (click)="deleteNotification(notification.notificationId)">
+                Mark as Read
+              </button>
+              
+            </div>
+          </li>
+          <li *ngIf="notifications.length === 0" class="p-4 text-center text-gray-500 text-sm">
+            No new notifications
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Profile Icon -->
+    <div class="relative">
+      <i 
+        class="fas fa-user-circle text-3xl cursor-pointer" 
+        (click)="toggleProfileMenu()">
+      </i>
+      <!-- Profile Dropdown -->
+      <div 
+        *ngIf="isProfileMenuOpen" 
+        class="absolute right-0 mt-2 bg-gray-200 text-gray-800 rounded shadow-lg">
+        <button 
+          (click)="logout()" 
+          class="block px-4 py-2 text-red-600 hover:bg-gray-100 w-full">
+          Logout
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

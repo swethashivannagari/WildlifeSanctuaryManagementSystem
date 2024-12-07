@@ -1,0 +1,36 @@
+<div 
+  class="h-screen bg-gray-800 text-white fixed lg:relative transition-all duration-300"
+  [ngClass]="{ 'w-72': !isCollapsed, 'w-16': isCollapsed }">
+  
+  <div class="flex items-center justify-between mb-6">
+    
+    <button 
+      class="bg-gray-700 p-2 mt-2 ml-4 rounded" 
+      (click)="toggleCollapse()">
+      <i class="fas fa-bars "></i>
+      
+    </button>
+    <h1 class="text-2xl font-bold" *ngIf="!isCollapsed">Wildlife Sanctuary</h1>
+  </div>
+
+  <ul class="space-y-4">
+    <li *ngIf="showUsers">
+      <a 
+        [routerLink]="['/main', 'users']" 
+        routerLinkActive="bg-gray-700 rounded" 
+        class="flex items-center px-4 py-2 hover:bg-gray-700 rounded">
+        <i class="fas fa-users mr-2"></i> 
+        <span *ngIf="!isCollapsed">Users</span>
+      </a>
+    </li>
+    <li *ngFor="let item of menuItems">
+      <a 
+        [routerLink]="item.route" 
+        routerLinkActive="bg-gray-700 rounded" 
+        class="flex items-center px-4 py-2 hover:bg-gray-700 rounded">
+        <i [class]="item.icon + ' mr-2'"></i> 
+        <span *ngIf="!isCollapsed">{{ item.label }}</span>
+      </a>
+    </li>
+  </ul>
+</div>

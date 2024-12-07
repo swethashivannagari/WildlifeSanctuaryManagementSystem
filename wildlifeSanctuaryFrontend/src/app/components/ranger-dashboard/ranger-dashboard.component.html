@@ -1,0 +1,80 @@
+<div class="my-background bg-cover bg-center flex flex-col   items-center py-12 bg-gray-200 p-4 overflow-y-hidden scrollbar-hidden"style="background-image: url('../../../assets/images/ranger.jpeg');">
+  <!-- Main Container -->
+  <div class="w-full max-w-screen-2xl  mx-auto md:px-4 sm:px-6 ">
+   
+    <div class="flex flex-col lg:flex-row justify-center ">
+
+    <div class="flex flex-col">
+      <div>
+        <h1 class="font-bold text-3xl text-white">Welcome {{username}}!!!</h1>
+      </div>
+    <!-- Top Cards Section -->
+    <div class="grid grid-cols-1, sm:grid-cols-2, and lg:grid-cols-3 gap-6 my-8">
+      <!-- Card 1: Total Incidents -->
+      <div class="bg-white p-6 rounded-lg shadow-md flex justify-between items-center  w-full">
+        <div>
+          <h3 class="text-lg font-semibold text-gray-700">Total Incidents</h3>
+          <p class="text-3xl font-bold text-gray-500">{{incidentsCount}}</p>
+        </div>
+        <div class="bg-blue-500 text-white p-4 rounded-full">
+          <i class="fas fa-clipboard-list text-2xl"></i>
+        </div>
+      </div>
+
+      <!-- Card 2: Total Sanctuaries -->
+      <div class="bg-white p-6 rounded-lg shadow-md flex justify-between items-center">
+        <div>
+          <h3 class="text-lg font-semibold text-gray-700">Sanctuaries</h3>
+          <p class="text-3xl font-bold text-gray-500">{{sanctuariesCount}}</p>
+        </div>
+        <div class="bg-green-500 text-white p-4 rounded-full">
+          <i class="fas fa-tree text-2xl"></i>
+        </div>
+      </div>
+
+      <!-- Card 3: Patrol Schedule -->
+      <div class="bg-white p-6 rounded-lg shadow-md flex justify-between items-center ">
+        <div>
+          <h3 class="text-lg font-semibold text-gray-700">Patrols Count</h3>
+          <p class="text-xl text-gray-500">3</p>
+        </div>
+        <div class="bg-yellow-500 text-white p-4 rounded-full">
+          <i class="fas fa-calendar-day text-2xl"></i>
+        </div>
+      </div>
+    </div>
+    <div class="flex flex-col lg:flex-row gap-6">
+     
+      <app-incident></app-incident>
+    </div>
+  </div>
+
+  
+
+      <!-- Charts Section -->
+      <div class="flex flex-col  space-y-4 lg:ml-10 ">
+        <!-- Pie Chart -->
+        <div class="bg-white p-2 rounded-lg shadow-md">
+          <h3 class="text-lg font-semibold text-gray-700 mb-4">Incident Severity Distribution</h3>
+          <div *ngIf="ChartEmpty">
+            <p class="text-center text-gray-500">{{ emptyMessage }}</p>
+          </div>
+          <div class="w-full h-52 bg-gray-200 rounded-lg flex items-center justify-center">
+            <canvas id="statusPieChart" width="300" height="300"></canvas>
+          </div>
+        </div>
+
+        <!-- Bar Chart -->
+        <div class="bg-white p-4 rounded-lg shadow-md">
+          <h3 class="text-lg font-semibold text-gray-700 mb-4">Incident Severity Distribution</h3>
+          <div *ngIf="ChartEmpty">
+            <p class="text-center text-gray-500">{{ emptyMessage }}</p>
+          </div>
+          <div class="w-full h-52 bg-gray-200 rounded-lg flex items-center justify-center">
+            <canvas id="severityBarChart" width="400" height="300"></canvas>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div> 

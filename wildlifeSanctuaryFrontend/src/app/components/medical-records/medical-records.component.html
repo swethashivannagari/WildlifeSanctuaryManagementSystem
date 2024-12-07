@@ -1,0 +1,57 @@
+<!-- src/app/medical-records/medical-records.component.html -->
+<div class="bg-gray-200 rounded overflow-x-auto overflow-y-auto max-h-[400px] scrollbar-hidden">
+  <h3 class="text-lg font-semibold mb-1">Veterinary Sanctuary Medical Records</h3>
+  <!-- <div *ngIf="medicalRecords.length === 0" class="text-center mt-6 text-gray-500">
+    <p class="font-semibold text-2xl">No medical records available. Please add one to get started.</p>
+    <div class="bg-white h-auto p-6 text-white-500 rounded-lg shadow-lg" 
+         style="background-image: url('../../assets/images/sanctuary.jpg'); background-size: cover; background-position: center;">
+      <h2 class="text-xl font-bold text-white">Important Information</h2>
+      <div class="mt-4">
+        <p class="text-white font-semibold text-lg">
+          Sanctuaries play a critical role in conserving endangered species and maintaining biodiversity. 
+          Your support helps ensure these animals receive the care they need to thrive.
+        </p>
+        <p class="mt-2 text-white font-semibold text-lg">
+          As a sanctuary, we provide shelter, medical care, and rehabilitation to wildlife in need. By being involved,
+          you help in preserving our natural world.
+        </p>
+        <p class="mt-2 text-white font-semibold text-lg">
+          Veterinarians in sanctuaries play a crucial role in providing medical care, rehabilitation, and monitoring the health of rescued wildlife.
+           They ensure the well-being of animals by diagnosing illnesses, administering treatments, and supporting recovery in a safe, protected environment
+        </p>
+      </div>
+    </div>
+  </div> -->
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+    <!-- Display when no records are available -->
+   
+    <div *ngFor="let record of medicalRecords" class="bg-white shadow-md p-6 rounded">
+      <div class="flex justify-between">
+        
+
+        <!-- Display individual record details -->
+        <div *ngIf="record" class="w-full">
+          <h4 class="font-semibold">Animal: {{ record.species }}</h4>
+          <p>Age: {{ record.age }}</p>
+          <p>Last Checkup: {{ record.date | date:'yyyy-MM-dd'}}</p>
+          <p>Health Status: {{ record.diagnosis }}</p>
+          <p>Treatment: {{ record.treatment }}</p>
+          <div class="flex items-center space-x-4 mt-4">
+            <!-- Edit button -->
+            <button *ngIf="role!=='Admin'" (click)="editRecord(record.recordId)" class="bg-blue-600 text-white px-6 py-2 rounded hover:bg-blue-600">
+              Update
+            </button>
+      
+            <!-- Delete button -->
+            <button (click)="deleteRecord(record.recordId)" class="bg-red-500 text-white px-6 py-2 rounded hover:bg-red-600">
+              Delete
+            </button>
+          </div>
+        </div>
+
+        <!-- Animal image display -->
+        <img src="../../assets/images/tigerimg.jpg" alt="Animal Image" class="w-16 h-16 rounded-full">
+      </div>
+    </div>
+  </div>
+</div>

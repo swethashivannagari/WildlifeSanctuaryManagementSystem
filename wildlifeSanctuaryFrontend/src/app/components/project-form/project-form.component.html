@@ -1,0 +1,112 @@
+<div class="flex justify-center items-center min-h-screen bg-cover bg-center bg-no-repeat mt-2" style="background-image: url('../../../assets/images/elephantsWithRiver.jpg');">
+   
+    <div class="bg-white p-8 rounded-lg shadow-lg w-full max-w-md">
+      <h2  class="text-2xl font-bold text-center text-indigo-600 mb-6">{{isEditMode?"Edit Project Details":"Add Project"}}</h2>
+  
+      <form [formGroup]="projectForm" (ngSubmit)="onProjectSubmit()">
+        <!-- Sanctuary ID -->
+        <div class="mb-4">
+          <label for="sanctuaryId" class="block text-sm font-medium text-gray-600">Sanctuary ID</label>
+          <input
+            id="sanctuaryId"
+            formControlName="sanctuaryId"
+            type="number"
+            class="mt-1 block w-full px-3 py-2 border rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+            placeholder="Enter Sanctuary ID"
+          />
+          <div *ngIf="projectForm.get('sanctuaryId')?.invalid && projectForm.get('sanctuaryId')?.touched" class="text-sm text-red-500 font-semibold">
+            **Sanctuary ID is required.
+          </div>
+        </div>
+  
+        <!-- Activity Type -->
+        <div class="mb-4">
+          <label for="activityType" class="block text-sm font-medium text-gray-600">Activity Type</label>
+          <input
+            id="activityType"
+            formControlName="activityType"
+            type="text"
+            class="mt-1 block w-full px-3 py-2 border rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+            placeholder="Enter Activity Type"
+          />
+          <div *ngIf="projectForm.get('activityType')?.invalid && projectForm.get('activityType')?.touched" class="text-sm text-red-500 font-semibold">
+            **Activity Type is required and cannot exceed 100 characters.
+          </div>
+        </div>
+  
+        <!-- Start Date -->
+        <div class="mb-4">
+          <label for="startDate" class="block text-sm font-medium text-gray-600">Start Date</label>
+          <input
+            id="startDate"
+            formControlName="startDate"
+            type="date"
+            class="mt-1 block w-full px-3 py-2 border rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+          />
+          <div *ngIf="projectForm.get('startDate')?.invalid && projectForm.get('startDate')?.touched" class="text-sm text-red-500 font-semibold">
+            **Start Date is required.
+          </div>
+        </div>
+  
+        <!-- End Date -->
+        <div class="mb-4">
+          <label for="endDate" class="block text-sm font-medium text-gray-600">End Date</label>
+          <input
+            id="endDate"
+            formControlName="endDate"
+            type="date"
+            class="mt-1 block w-full px-3 py-2 border rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+          />
+          <div *ngIf="projectForm.get('endDate')?.invalid && projectForm.get('endDate')?.touched" class="text-sm text-red-500 font-semibold">
+            **End Date is required and must be after the Start Date.
+          </div>
+        </div>
+  
+        <!-- Assigned Ranger -->
+        <div class="mb-4">
+          <label for="rangerId" class="block text-sm font-medium text-gray-600">Assigned Ranger ID</label>
+          <input
+            id="rangerId"
+            formControlName="rangerId"
+            type="number"
+            class="mt-1 block w-full px-3 py-2 border rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+            placeholder="Enter Assigned Ranger ID"
+          />
+          <div *ngIf="projectForm.get('rangerId')?.invalid && projectForm.get('rangerId')?.touched" class="text-sm text-red-500 font-semibold">
+            **Assigned Ranger ID is required.
+          </div>
+        </div>
+  
+        <!-- Status -->
+        <div class="mb-4">
+          <label for="status" class="block text-sm font-medium text-gray-600">Status</label>
+          <select
+            id="status"
+            formControlName="status"
+            class="mt-1 block w-full px-3 py-2 border rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+          >
+            <option value="" disabled>Select status</option>
+            <option value="Active">Active</option>
+            <option value="Completed">Completed</option>
+            <option value="Pending">Pending</option>
+            <option value="Cancelled">Cancelled</option>
+          </select>
+          <div *ngIf="projectForm.get('status')?.invalid && projectForm.get('status')?.touched" class="text-sm text-red-500 font-semibold">
+            **Status is required.
+          </div>
+        </div>
+  
+        <!-- Submit Button -->
+        <div>
+          <button
+            type="submit"
+            [disabled]="projectForm.invalid"
+            class="w-full bg-indigo-600 text-white py-2 px-4 rounded-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+          >
+            Submit Project
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+  

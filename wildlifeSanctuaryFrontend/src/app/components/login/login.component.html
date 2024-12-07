@@ -1,0 +1,68 @@
+<div class="min-h-screen bg-cover my-background">
+    <div class="flex items-center justify-center min-h-screen bg-black/50 text-white">
+      <div class="bg-gray-500 bg-opacity-60 p-8 rounded-lg shadow-lg max-w-md w-full">
+        
+        <!-- Header -->
+        <div class="text-center">
+          <h2 class="text-2xl font-semibold my-3">Welcome To WildLife Sanctuary</h2>
+          <hr>
+        </div>
+        
+        <!-- Login Form -->
+        <form class="mt-6 space-y-4 text-black" [formGroup]="loginForm" (ngSubmit)="onLogin()">
+          
+          <!-- Error Message -->
+          <div *ngIf="errorMessage" class="text-center text-red-600 font-bold text-lg">
+            {{ errorMessage }}
+          </div>
+  
+          <!-- Email Input and Validation -->
+          <div *ngIf="loginForm.get('email')?.invalid && loginForm.get('email')?.touched">
+            <small class="text-red-600 text-sm font-bold" *ngIf="loginForm.get('email')?.hasError('required')">
+              **Email is required
+            </small>
+            <small class="text-red-600 text-sm font-bold" *ngIf="loginForm.get('email')?.hasError('email')">
+              **Please enter a valid email
+            </small>
+          </div>
+          <input 
+            type="email" 
+            id="email"
+            placeholder="Email" 
+            formControlName="email"
+            class="w-full px-4 py-2 border border-gray-300 bg-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+          />
+          
+          <!-- Password Input and Validation -->
+          <div *ngIf="loginForm.get('password')?.invalid && loginForm.get('password')?.touched">
+            <small class="text-red-600 text-sm font-bold" *ngIf="loginForm.get('password')?.hasError('required')">
+              **Password is required
+            </small>
+            <small class="text-red-600 text-sm font-bold" *ngIf="loginForm.get('password')?.hasError('minlength')">
+              **Password must be at least 6 characters
+            </small>
+          </div>
+          <input 
+            type="password" 
+            id="password"
+            formControlName="password"
+            placeholder="Password" 
+            class="w-full px-4 py-2 border border-gray-300 bg-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+          />
+          
+          <!-- Submit Button -->
+          <button 
+            type="submit" 
+            [disabled]="loginForm.invalid"
+            class="w-full bg-blue-400 text-white py-2 rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
+          >
+            Log In
+          </button>
+          
+        </form>
+        
+  
+      </div>
+    </div>
+  </div>
+  

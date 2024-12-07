@@ -1,0 +1,32 @@
+<div class=" justify-center">
+  
+  <div class="flex justify-between items-center">
+    <h2 class="font-bold text-2xl text-green-600 border">Sanctuaries</h2>
+    <button (click)="addSanctuary()" class="bg-green-700 text-white px-4 py-2 rounded-md">Add Sanctuary</button>
+  </div>
+
+  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 p-6">
+
+    <div *ngFor="let sanctuary of sanctuaries"
+      class="bg-gradient-to-br from-green-800 via-green-700 to-green-600 text-white rounded-lg shadow-lg p-5 hover:shadow-xl transition-shadow duration-300">
+
+      <!-- Sanctuary Name -->
+      <h3 class="text-lg font-bold mb-3 text-center uppercase tracking-wide">
+        {{ sanctuary.name }}
+      </h3>
+
+      <h2>{{sanctuary.name}}</h2>
+      <p><strong>Location:</strong> {{sanctuary.location}}</p>
+      <p><strong>Total Area:</strong> {{sanctuary.totalArea}} sq. km</p>
+      <p><strong>Habitat Type:</strong> {{sanctuary.habitatType}}</p>
+      <p><strong>Protected Species:</strong> {{sanctuary.protectedSpecies}}</p>
+      <p><strong>Status:</strong> {{sanctuary.status}}</p>
+      <p><strong>Manager:</strong> {{sanctuary.managerName}}</p>
+      <!-- Action Buttons -->
+      <div class="flex justify-center">
+        <button (click)="editSanctuary(sanctuary.sanctuaryId)"><i class="fas fa-edit"></i></button>
+        <button (click)="deleteSanctuary(sanctuary.sanctuaryId)"><i class="fa fa-trash" aria-hidden="true"></i></button>
+      </div>
+    </div>
+  </div>
+</div>
